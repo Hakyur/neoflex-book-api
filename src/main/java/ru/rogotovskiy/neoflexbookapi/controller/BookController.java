@@ -1,12 +1,15 @@
 package ru.rogotovskiy.neoflexbookapi.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.rogotovskiy.neoflexbookapi.dto.CreateBookRequest;
 import ru.rogotovskiy.neoflexbookapi.service.BookService;
 
 @RestController
+@Validated
 @RequestMapping("/v1/book")
 @RequiredArgsConstructor
 public class BookController {
@@ -24,7 +27,7 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createBook(@RequestBody CreateBookRequest request) {
+    public ResponseEntity<?> createBook(@RequestBody @Valid CreateBookRequest request) {
         return ResponseEntity.ok(bookService.createBook(request));
     }
 
